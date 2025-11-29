@@ -26,7 +26,7 @@ const STORAGE_KEY = 'resistance_game_state';
 const INITIAL_STATE: GameState = {
   playerCount: 5,
   missionStatus: ['default', 'default', 'default', 'default', 'default'],
-  voteTrack: 1,
+  voteTrack: 0,
   gameStarted: false,
 };
 

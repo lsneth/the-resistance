@@ -54,32 +54,30 @@ export default function Board() {
         
         {/* Mission Track */}
         <div className="w-full max-w-3xl bg-board-surface/50 p-6 rounded-2xl border border-gray-800 backdrop-blur-sm">
-          <div className="relative w-full">
-            <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-800 -z-10 rounded-full" />
-            <div className="flex justify-between items-center px-2 md:px-8">
-              {missionStatus.map((status, index) => (
-                <div key={index} className="flex flex-col items-center gap-2 relative group">
-                  {failsRequired[index] && (
-                    <span className="absolute -top-6 text-[9px] md:text-[10px] uppercase tracking-tighter text-gray-400 whitespace-nowrap bg-board-bg px-1.5 border border-gray-800 rounded-full">
-                      Two Fails Req.
-                    </span>
+          <div className="relative w-full flex justify-between items-center px-2 md:px-8">
+            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-gray-800 rounded-full" style={{ zIndex: 0 }} />
+            {missionStatus.map((status, index) => (
+              <div key={index} className="flex flex-col items-center gap-2 relative group" style={{ zIndex: 1 }}>
+                {failsRequired[index] && (
+                  <span className="absolute -top-6 text-[9px] md:text-[10px] uppercase tracking-tighter text-gray-400 whitespace-nowrap bg-board-bg px-1.5 border border-gray-800 rounded-full">
+                    Two Fails Req.
+                  </span>
+                )}
+                
+                <button
+                  onClick={() => toggleMission(index)}
+                  className={cn(
+                    "w-14 h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center text-2xl md:text-3xl font-bold transition-all duration-300 border-4 shadow-lg",
+                    status === 'default' && "bg-board-card border-gray-600 text-gray-400 hover:border-gray-400",
+                    status === 'success' && "bg-resistance-blue/20 border-resistance-blue text-resistance-blue shadow-[0_0_30px_rgba(0,191,255,0.4)]",
+                    status === 'fail' && "bg-spy-red/20 border-spy-red text-spy-red shadow-[0_0_30px_rgba(255,65,54,0.4)]"
                   )}
-                  
-                  <button
-                    onClick={() => toggleMission(index)}
-                    className={cn(
-                      "w-14 h-14 md:w-20 md:h-20 rounded-full flex items-center justify-center text-2xl md:text-3xl font-bold transition-all duration-300 border-4 shadow-lg",
-                      status === 'default' && "bg-board-card border-gray-600 text-gray-400 hover:border-gray-400",
-                      status === 'success' && "bg-resistance-blue/20 border-resistance-blue text-resistance-blue shadow-[0_0_30px_rgba(0,191,255,0.4)]",
-                      status === 'fail' && "bg-spy-red/20 border-spy-red text-spy-red shadow-[0_0_30px_rgba(255,65,54,0.4)]"
-                    )}
-                  >
-                    {missionCounts[index]}
-                  </button>
-                  <span className="text-[10px] text-gray-500 uppercase tracking-widest">Mission {index + 1}</span>
-                </div>
-              ))}
-            </div>
+                >
+                  {missionCounts[index]}
+                </button>
+                <span className="text-[10px] text-gray-500 uppercase tracking-widest">Mission {index + 1}</span>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -89,7 +87,7 @@ export default function Board() {
           <div className="flex flex-col items-start gap-3">
             <span className="text-xs uppercase tracking-widest text-gray-400">Vote Track</span>
             <div className="flex gap-3 md:gap-6">
-              {[1, 2, 3, 4, 5].map((num) => (
+              {[0, 1, 2, 3, 4, 5].map((num) => (
                 <button
                   key={num}
                   onClick={() => setVote(num)}
