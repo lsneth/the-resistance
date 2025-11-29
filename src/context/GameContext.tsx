@@ -66,8 +66,8 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   const toggleMission = (index: number) => {
     const newStatus = [...state.missionStatus];
     const current = newStatus[index];
-    if (current === 'default') newStatus[index] = 'fail'; // Red
-    else if (current === 'fail') newStatus[index] = 'success'; // Blue
+    if (current === 'default') newStatus[index] = 'success'; // Blue
+    else if (current === 'success') newStatus[index] = 'fail'; // Red
     else newStatus[index] = 'default';
 
     saveState({ ...state, missionStatus: newStatus });
